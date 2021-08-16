@@ -30,10 +30,10 @@ router.get("/", async (req, res) => {
   if (req.query.publishedBefore != null && req.query.publishedBefore != "") {
     // lte selects the documents where the value of the field is
     // less than or equal to (i.e. <=) the specified value.
-    query = query.lte("publishedDate", req.query.publishedBefore);
+    query = query.lte("publishDate", req.query.publishedBefore);
   }
   if (req.query.publishedAfter != null && req.query.publishedAfter != "") {
-    query = query.gte("publishedDate", req.query.publishedAfter);
+    query = query.gte("publishDate", req.query.publishedAfter);
   }
   try {
     // instead of await for book.find({})
