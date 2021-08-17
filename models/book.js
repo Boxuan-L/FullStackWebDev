@@ -1,7 +1,4 @@
 const mongoose = require("mongoose");
-const path = require("path");
-
-const coverImageBasePath = "uploads/bookCovers";
 
 const bookSchema = new mongoose.Schema({
   title: {
@@ -23,7 +20,11 @@ const bookSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-  coverImageName: {
+  coverImage: {
+    type: Buffer,
+    required: true,
+  },
+  coverImageType: {
     type: String,
     required: true,
   },
@@ -37,12 +38,12 @@ const bookSchema = new mongoose.Schema({
 });
 // it will derive its value from the above values
 bookSchema.virtual("coverImagePath").get(function () {
-  // use a funtion but not => function, becuase we will use this keyword
-  if (this.coverImageName != null) {
-    // already add express.static to public folder
-    return path.join("/", coverImageBasePath, this.coverImageName);
+  // take the Buffer data and use it as the actual source of the image
+  if (this.coverImage != null && this.coverImageType != null) {
+    return `data:${
+      this.coverImageType
+    };charset=utf-8;base64,${this.coverImage.toString("base64")}`;
   }
 });
 
 module.exports = mongoose.model("Book", bookSchema);
-module.exports.coverImageBasePath = coverImageBasePath;
