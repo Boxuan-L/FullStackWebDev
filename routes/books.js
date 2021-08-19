@@ -27,7 +27,6 @@ router.get("/", async (req, res) => {
   try {
     // instead of await for book.find({})
     const books = await query.exec();
-    console.log(req.query);
     res.render("books/index", {
       books: books,
       searchOptions: req.query,
@@ -55,24 +54,104 @@ router.post("/new", async (req, res) => {
   saveCover(book, req.body.cover);
 
   try {
-    // remember to add wait before book.save()
     const newBook = await book.save();
     //
-    res.redirect("/books");
+    res.redirect(`/books/${newBook.id}`);
   } catch {
     renderNewPage(res, book, true);
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    // populate means it will populate the author variable
+    // inside of the book obj with all the information. instead
+    // of an id, it will be an obj.
+    const book = await Book.findById(req.params.id).populate("author").exec();
+    res.render("books/show", { book: book });
+  } catch (error) {}
+});
+
+// Edit Book
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    renderEditPage(res, book);
+  } catch (error) {
+    res.redirect("/");
+  }
+});
+
+// Update book
+router.put("/:id", async (req, res) => {
+  let book;
+  try {
+    book = await Book.findById(req.params.id);
+    book.title = req.body.title;
+    book.author = req.body.author;
+    book.publishDate = new Date(req.body.publishDate);
+    book.pageCount = req.body.pageCount;
+    book.description = req.body.description;
+    // don't want to replace the old cover if the user
+    // doesn't pass a new one.
+    if (req.body.cover != null && req.body.cover != "") {
+      saveCover(book, req.body.cover);
+    }
+    await book.save();
+    res.redirect(`/books/${book.id}`);
+  } catch {
+    if (book != null) {
+      renderEditPage(res, book, true);
+    } else {
+      res.redirect("/");
+    }
+  }
+});
+
+// Delete
+router.delete("/:id", async (req, res) => {
+  let book;
+  try {
+    book = await Book.findById(req.params.id);
+    await book.remove();
+    res.redirect("/books");
+  } catch (error) {
+    // not able to delete
+    if (book != null) {
+      res.render("books/show", {
+        book: book,
+        errorMessage: "Could not remove book",
+      });
+      // not able to find book
+    } else {
+      res.redirect("/");
+    }
+  }
+});
+
 async function renderNewPage(res, book, hasError = false) {
+  renderFormPage(res, book, "new", hasError);
+}
+
+async function renderEditPage(res, book, hasError = false) {
+  renderFormPage(res, book, "edit", hasError);
+}
+
+async function renderFormPage(res, book, form, hasError = false) {
   try {
     const authors = await Author.find({});
     const params = {
       authors: authors,
       book: book,
     };
-    if (hasError) params.errorMessage = "Error creating book";
-    res.render("books/new", params);
+    if (hasError) {
+      if (form === "edit") {
+        params.errorMessage = "Error Updating Book";
+      } else if (form === "new") {
+        params.errorMessage = "Error Creating Book";
+      }
+    }
+    res.render(`books/${form}`, params);
   } catch {
     res.redirect("/books");
   }
