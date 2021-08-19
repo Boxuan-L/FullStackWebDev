@@ -26,8 +26,9 @@
 }
 
 .btn-row > * {
-  margin-top: 0.5rem;
   margin-left: 0.7rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 
 .btn-row > *:first-child {
