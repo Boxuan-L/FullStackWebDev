@@ -46,7 +46,7 @@
   color: var(--color-text-light);
   font-weight: var(--nav-link-font-weight);
   margin: 0.7rem;
-  padding: 0.2rem;
+  padding: 0.4rem;
   display: flex;
   align-items: center;
   /* neumorphism */
