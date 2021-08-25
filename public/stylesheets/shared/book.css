@@ -26,6 +26,8 @@
 
 .book-details {
   display: flex;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .book-details-label {
