@@ -79,8 +79,8 @@
 }
 
 .filepond--panel-root {
-  background-color: var(--form-input-background-color);
-  border: 1px solid var(--form-input-border-color);
+  background: #a8d0e6;
+  box-shadow: inset 5px 5px 4px #99bdd1, inset -5px -5px 4px #b7e3fb;
 }
 
 .filepond--drop-label {
