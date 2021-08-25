@@ -9,6 +9,18 @@
   text-decoration: none;
   font-size: var(--nav-title-font-size);
   font-weight: var(--nav-title-font-weight);
+  width: 15rem;
+  height: 4.3rem;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #a8d0e6;
+  box-shadow: 7px 7px 14px #90b3c6, -7px -7px 14px #c0edff;
+}
+
+.header-title:hover {
+  box-shadow: inset 7px 7px 14px #90b3c6, inset -7px -7px 14px #c0edff;
 }
 
 .header-nav {
@@ -33,7 +45,18 @@
   text-decoration: none;
   color: var(--color-text-light);
   font-weight: var(--nav-link-font-weight);
-  padding: 1rem;
+  margin: 0.7rem;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  /* neumorphism */
+  border-radius: 5px;
+  background: #a8d0e6;
+  box-shadow: 5px 5px 8px #8fb1c4, -5px -5px 8px #c1efff;
+}
+
+.header-nav li a:hover {
+  box-shadow: inset 5px 5px 8px #8fb1c4, inset -5px -5px 8px #c1efff;
 }
 
 .header-nav li a:hover,

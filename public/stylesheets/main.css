@@ -33,12 +33,21 @@ body {
 }
 
 .inner-container {
-  margin: 0 2rem;
+  padding: 0.5rem 1rem;
+  /* neumorphism */
+  border-radius: 0.5rem;
+  background: #a8d0e6;
+  box-shadow: 5px 5px 11px #94b7ca, -5px -5px 11px #bce9ff;
+}
+
+.inner-container .book-grid-large {
+  margin: 1.5rem 5rem;
 }
 
 .page-header {
   font-size: 2rem;
   font-weight: 500;
+  margin: 0;
 }
 
 .error-message {

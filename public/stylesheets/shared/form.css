@@ -2,7 +2,7 @@
   --form-label-font-size: 1.2rem;
   --form-input-border-color: hsl(var(--color-base-hue), 100%, 50%);
   --form-input-border-color-light: hsl(var(--color-base-hue), 100%, 80%);
-  --form-input-background-color: hsl(var(--color-base-hue), 100%, 30%);
+  --form-input-background-color: hsl(var(--color-base-hue), 100%, 80%);
 }
 
 .form-row {
@@ -43,6 +43,7 @@
 .form-item textarea {
   height: 2rem;
   padding: 0.25rem 0.5rem;
+  margin-bottom: 0.25rem;
   border-radius: 0.25rem;
   border: 1px solid var(--form-input-border-color);
   background-color: var(--form-input-background-color);
@@ -51,6 +52,10 @@
   font-weight: normal;
   font-family: "Barlow";
   outline: none;
+  border-color: lightblue;
+  /* neumorphisom */
+  background: #a8d0e6;
+  box-shadow: inset 5px 5px 4px #99bdd1, inset -5px -5px 4px #b7e3fb;
 }
 
 .form-item textarea {

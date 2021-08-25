@@ -1,6 +1,6 @@
 :root {
-  --book-cover-width: 200px;
-  --book-cover-width-large: 325px;
+  --book-cover-width: 150px;
+  --book-cover-width-large: 200px;
   --book-cover-aspect-ratio: 0.75;
 }
 
@@ -58,4 +58,12 @@
 .book-details-author-button {
   grid-area: author;
   justify-self: stretch;
+}
+
+img {
+  border: 2px solid #fff;
+  box-shadow: 5px 5px 8px #6f8896, -5px -5px 8px #97bbc7;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
 }
